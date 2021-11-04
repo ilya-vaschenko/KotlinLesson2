@@ -9,8 +9,8 @@ class RepositoryImpl : Repository {
         return listOf(
             Film(imageIndex = R.drawable.zayc),
             Film("Сова", "мьюзикл", 1950, R.drawable.sova),
-            Film("Ворон", "история", 2021,  R.drawable.voron),
-            Film("Хрюша", "документальный", 1991,  R.drawable.hrusha),
+            Film("Ворон", "история", 2021, R.drawable.voron),
+            Film("Хрюша", "документальный", 1991, R.drawable.hrusha),
         )
     }
 

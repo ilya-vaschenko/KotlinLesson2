@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kotlinlesson2.R
+import com.example.kotlinlesson2.databinding.MainFragmentBinding
 import com.example.kotlinlesson2.modl.Repository
 import com.example.kotlinlesson2.modl.RepositoryImpl
 import com.example.kotlinlesson2.viewmodel.AppState

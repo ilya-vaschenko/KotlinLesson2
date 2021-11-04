@@ -18,6 +18,7 @@ class FilmAdapter : RecyclerView.Adapter<FilmAdapter.ViewHolder>() {
             field = value
             notifyDataSetChanged()
         }
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(film: Film) {
             itemView.title.text = film.name
@@ -38,7 +39,7 @@ class FilmAdapter : RecyclerView.Adapter<FilmAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = repository.getFilmFromLocalStorage().size
 
-    internal fun setFilmList (filmList : List<Film>){
+    internal fun setFilmList(filmList: List<Film>) {
         this.filmList = filmList
         notifyDataSetChanged()
     }

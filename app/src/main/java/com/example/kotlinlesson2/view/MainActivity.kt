@@ -1,26 +1,26 @@
- package com.example.kotlinlesson2.view
+package com.example.kotlinlesson2.view
 
- import androidx.appcompat.app.AppCompatActivity
- import android.os.Bundle
- import com.example.kotlinlesson2.R
-
-
- class MainActivity : AppCompatActivity() {
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.example.kotlinlesson2.R
+import com.example.kotlinlesson2.databinding.MainActivityBinding
 
 
+class MainActivity : AppCompatActivity() {
 
-     private  val binding: MainActivityBinding by lazy {
-         MainActivityBinding.inflate(layoutInflater) }
 
-     override fun onCreate(savedInstanceState: Bundle?) {
-         super.onCreate(savedInstanceState)
+    private val binding: MainActivityBinding by lazy {
+        MainActivityBinding.inflate(layoutInflater)
+    }
 
-         binding = MainActivityBinding.inflate(layoutInflater)
-         setContentView(binding.root)
-         if (savedInstanceState == null) {
-             supportFragmentManager.beginTransaction()
-                 .replace(R.id.container, MainFragment.newInstance())
-                 .commitNow()
-         }
-     }
- }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setContentView(binding.root)
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, MainFragment.newInstance())
+                .commitNow()
+        }
+    }
+}

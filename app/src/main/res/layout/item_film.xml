@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/background">
+        android:background="#3F57EA">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageView"
@@ -66,15 +66,6 @@
                 android:text="Date"
                 android:textSize="@dimen/textDescription" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Description"
-            android:textSize="@dimen/textDescription"
-            android:layout_marginStart="@dimen/marginForElements"/>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

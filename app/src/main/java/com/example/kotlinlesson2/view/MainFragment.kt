@@ -5,18 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kotlinlesson2.R
 import com.example.kotlinlesson2.databinding.MainFragmentBinding
-import com.example.kotlinlesson2.modl.Repository
-import com.example.kotlinlesson2.modl.RepositoryImpl
 import com.example.kotlinlesson2.viewmodel.AppState
 import com.example.kotlinlesson2.viewmodel.MainViewModel
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.main_fragment.*
 
 class MainFragment : Fragment() {
@@ -28,7 +24,9 @@ class MainFragment : Fragment() {
     private val filmAdapter: FilmAdapter by lazy {
         FilmAdapter()
     }
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by lazy { //создае вью модель
+        ViewModelProvider(this).get(MainViewModel::class.java)
+    }
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
     private var isRus: Boolean = true
@@ -37,56 +35,59 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.main_fragment, container, false)
+        val view = inflater.inflate(
+            R.layout.main_fragment, container,
+            false
+        )
 
         _binding = MainFragmentBinding.bind(view)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-
-        filmAdapter.listener = FilmAdapter.OnItemViewClickListener { film ->
-            val manager = activity?.supportFragmentManager
-            if (manager != null) {
-                val bundle = Bundle()
-                bundle.putParcelable(DetailFragment.FILM_EXTRA, film)
-                manager.beginTransaction()
-                    .replace(R.id.container, DetailFragment.newInstance(bundle))
-                    .addToBackStack("")
-                    .commit()
+        filmAdapter.listener =
+            FilmAdapter.OnItemViewClickListener { film ->
+                activity?.supportFragmentManager?.let {
+                    it.beginTransaction()
+                        .replace(R.id.container, DetailFragment.newInstance(Bundle().apply {
+                            putParcelable(
+                                DetailFragment.FILM_EXTRA,
+                                film
+                            )
+                        }))
+                        .addToBackStack("")
+                        .commit()
+                }
             }
-        }
-
-        button.setOnClickListener {
-            viewModel.liveData.observe(viewLifecycleOwner,
-                { state ->
-                    renderData(state)
-                })
-            viewModel.getFilmFromLocalSource(isRus)
-        }
 
         binding.buttonLang.setOnClickListener {
-            isRus =! isRus
-            if(isRus){
+            isRus = !isRus
+            if (isRus) {
                 binding.buttonLang.setImageResource(R.drawable.russ)
             } else {
                 binding.buttonLang.setImageResource(R.drawable.euro)
             }
             viewModel.getFilmFromLocalSource(isRus)
         }
+
+        button.setOnClickListener {
+            viewModel.liveData.observe(viewLifecycleOwner)
+            { state ->
+                renderData(state)
+            }
+            viewModel.getFilmFromLocalSource(isRus)
+        }
     }
 
-    private fun renderData(state: AppState) {
 
+    private fun renderData(state: AppState) {
         when (state) {
-            is AppState.Loading -> binding.loadingLayout.visibility = View.VISIBLE
+            is AppState.Loading -> binding.loadingLayout.show()
 
             is AppState.Success -> {
-                binding.loadingLayout.visibility = View.GONE
+                binding.loadingLayout.hide()
 
                 filmAdapter.filmList = state.filmsList
 
@@ -105,11 +106,13 @@ class MainFragment : Fragment() {
                 }
             }
             is AppState.Error -> {
-                binding.loadingLayout.visibility = View.GONE
-                Snackbar
-                    .make(binding.mainView, "ERROR", Snackbar.LENGTH_INDEFINITE)
-                    .setAction("Reload") { viewModel.getFilmFromLocalSource() }
-                    .show()
+                binding.loadingLayout.hide()
+                binding.FABButton.showSnackBar(
+                    "ERROR",
+                    "Reload",
+                    { viewModel.getFilmFromLocalSource() }
+                )
+
             }
         }
     }

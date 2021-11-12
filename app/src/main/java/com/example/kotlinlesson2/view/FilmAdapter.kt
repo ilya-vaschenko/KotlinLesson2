@@ -6,28 +6,25 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinlesson2.R
 import com.example.kotlinlesson2.modl.Film
-import com.example.kotlinlesson2.modl.Repository
-import com.example.kotlinlesson2.modl.RepositoryImpl
 import kotlinx.android.synthetic.main.item_film.view.*
 
 class FilmAdapter : RecyclerView.Adapter<FilmAdapter.ViewHolder>() {
 
     var filmList: List<Film> = ArrayList()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
 
     var listener: OnItemViewClickListener? = null
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) :
+        RecyclerView.ViewHolder(itemView) {
         fun bind(film: Film) {
-            itemView.title.text = film.name
-            itemView.genre.text = film.genre
-            itemView.date.text = film.date.toString()
-            itemView.imageView.setImageResource(film.imageIndex)
-            itemView.setOnClickListener {
-                listener?.onItemClick(film)
+            itemView.apply {
+                title.text = film.name
+                genre.text = film.genre
+                date.text = film.date.toString()
+                imageView.setImageResource(film.imageIndex)
+                setOnClickListener {
+                    listener?.onItemClick(film)
+                }
             }
         }
     }
@@ -48,7 +45,7 @@ class FilmAdapter : RecyclerView.Adapter<FilmAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun interface OnItemViewClickListener{
+    fun interface OnItemViewClickListener {
         fun onItemClick(film: Film)
     }
 }

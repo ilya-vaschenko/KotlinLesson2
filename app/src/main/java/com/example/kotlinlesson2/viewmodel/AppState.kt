@@ -1,6 +1,6 @@
 package com.example.kotlinlesson2.viewmodel
 
-import com.example.kotlinlesson2.modl.Film
+import com.example.kotlinlesson2.model.Film
 
 sealed class AppState {
     data class Success(val filmsList: List<Film>) : AppState()

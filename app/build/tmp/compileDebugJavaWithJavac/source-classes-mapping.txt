@@ -1,0 +1,10 @@
+com/example/kotlinlesson2/databinding/MainFragmentBinding.java
+ com.example.kotlinlesson2.databinding.MainFragmentBinding
+com/example/kotlinlesson2/databinding/MainActivityBinding.java
+ com.example.kotlinlesson2.databinding.MainActivityBinding
+com/example/kotlinlesson2/databinding/ItemFilmBinding.java
+ com.example.kotlinlesson2.databinding.ItemFilmBinding
+com/example/kotlinlesson2/BuildConfig.java
+ com.example.kotlinlesson2.BuildConfig
+com/example/kotlinlesson2/databinding/DetailFragmentBinding.java
+ com.example.kotlinlesson2.databinding.DetailFragmentBinding

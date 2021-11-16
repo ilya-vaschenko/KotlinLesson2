@@ -12,16 +12,21 @@ class MainViewModel(private val liveDataToObserve: MutableLiveData<AppState> = M
     private val repository: Repository = RepositoryImpl()
     val liveData: LiveData<AppState> = liveDataToObserve
 
-    fun getFilmFromLocalSource() = getDataFromLocalSource()
-    fun getFilmFromRemoteSource() = getDataFromLocalSource()
+    fun getFilmFromLocalSource(isRus: Boolean = true) = getDataFromLocalSource(isRus)
 
-    private fun getDataFromLocalSource() {
+
+    private fun getDataFromLocalSource(isRus: Boolean = true) {
         liveDataToObserve.value = AppState.Loading
 
         Thread {
             Thread.sleep(2000)
-            liveDataToObserve.postValue(AppState.Success(repository.getFilmFromLocalStorage()))
-
+            liveDataToObserve.postValue(AppState.Success(
+                if(isRus){
+                    repository.getFilmFromLocalStorageRus()
+                } else {
+                    repository.getFilmFromLocalStorageWorld()
+                }
+            ))
         }.start()
     }
 }

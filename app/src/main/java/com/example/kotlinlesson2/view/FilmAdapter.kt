@@ -12,19 +12,23 @@ import kotlinx.android.synthetic.main.item_film.view.*
 
 class FilmAdapter : RecyclerView.Adapter<FilmAdapter.ViewHolder>() {
 
-    val repository: Repository = RepositoryImpl()
     var filmList: List<Film> = ArrayList()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    var listener: OnItemViewClickListener? = null
+
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(film: Film) {
             itemView.title.text = film.name
             itemView.genre.text = film.genre
             itemView.date.text = film.date.toString()
             itemView.imageView.setImageResource(film.imageIndex)
+            itemView.setOnClickListener {
+                listener?.onItemClick(film)
+            }
         }
     }
 
@@ -37,10 +41,14 @@ class FilmAdapter : RecyclerView.Adapter<FilmAdapter.ViewHolder>() {
         holder.bind(filmList[position])
     }
 
-    override fun getItemCount(): Int = repository.getFilmFromLocalStorage().size
+    override fun getItemCount(): Int = filmList.size
 
     internal fun setFilmList(filmList: List<Film>) {
         this.filmList = filmList
         notifyDataSetChanged()
+    }
+
+    fun interface OnItemViewClickListener{
+        fun onItemClick(film: Film)
     }
 }

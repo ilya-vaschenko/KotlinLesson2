@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -27,10 +28,10 @@ class MainFragment : Fragment() {
     private val filmAdapter: FilmAdapter by lazy {
         FilmAdapter()
     }
-
     private lateinit var viewModel: MainViewModel
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
+    private var isRus: Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,24 +49,47 @@ class MainFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
+        filmAdapter.listener = FilmAdapter.OnItemViewClickListener { film ->
+            val manager = activity?.supportFragmentManager
+            if (manager != null) {
+                val bundle = Bundle()
+                bundle.putParcelable(DetailFragment.FILM_EXTRA, film)
+                manager.beginTransaction()
+                    .replace(R.id.container, DetailFragment.newInstance(bundle))
+                    .addToBackStack("")
+                    .commit()
+            }
+        }
+
         button.setOnClickListener {
             viewModel.liveData.observe(viewLifecycleOwner,
                 { state ->
                     renderData(state)
                 })
-            viewModel.getFilmFromLocalSource()
+            viewModel.getFilmFromLocalSource(isRus)
+        }
+
+        binding.buttonLang.setOnClickListener {
+            isRus =! isRus
+            if(isRus){
+                binding.buttonLang.setImageResource(R.drawable.russ)
+            } else {
+                binding.buttonLang.setImageResource(R.drawable.euro)
+            }
+            viewModel.getFilmFromLocalSource(isRus)
         }
     }
 
     private fun renderData(state: AppState) {
-        val repository: Repository = RepositoryImpl()
+
         when (state) {
             is AppState.Loading -> binding.loadingLayout.visibility = View.VISIBLE
 
             is AppState.Success -> {
                 binding.loadingLayout.visibility = View.GONE
 
-                filmAdapter.setFilmList(repository.getFilmFromLocalStorage())
+                filmAdapter.filmList = state.filmsList
+
                 filmAdapter.let {
                     val layoutManager = LinearLayoutManager(view?.context)
                     recycler_view_lines.layoutManager =

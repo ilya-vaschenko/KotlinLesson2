@@ -9,8 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#3F57EA">
+        android:background="#3F57EA"
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageView"
@@ -37,10 +37,10 @@
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/marginForElements"
                 android:gravity="end"
                 android:text="Title"
-                android:textSize="@dimen/textTitle"
-                android:layout_marginEnd="@dimen/marginForElements"/>
+                android:textSize="@dimen/textTitle" />
         </LinearLayout>
 
         <LinearLayout
@@ -53,10 +53,10 @@
                 android:id="@+id/genre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginForElements"
                 android:layout_weight="2"
-                android:text="Ganre"
-                android:textSize="@dimen/textGenre"
-                android:layout_marginStart="@dimen/marginForElements"/>
+                android:text="Genre"
+                android:textSize="@dimen/textGenre" />
 
             <TextView
                 android:id="@+id/date"
@@ -66,6 +66,15 @@
                 android:text="Date"
                 android:textSize="@dimen/textDescription" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginForElements"
+            android:layout_weight="1"
+            android:text="Description"
+            android:textSize="@dimen/textDescription" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

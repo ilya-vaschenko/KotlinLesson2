@@ -4,5 +4,4 @@ interface Repository {
     fun getFilmFromServer(): Film
     fun getFilmFromLocalStorageRus(): List<Film>
     fun getFilmFromLocalStorageWorld(): List<Film>
-
 }

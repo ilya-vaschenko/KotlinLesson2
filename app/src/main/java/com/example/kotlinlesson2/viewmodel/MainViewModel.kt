@@ -17,7 +17,6 @@ class MainViewModel(
 
     fun getFilmFromLocalSource(isRus: Boolean = true) = getDataFromLocalSource(isRus)
 
-
     private fun getDataFromLocalSource(isRus: Boolean = true) {
         liveDataToObserve.value = AppState.Loading
 

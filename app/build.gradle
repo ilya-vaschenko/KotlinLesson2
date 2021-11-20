@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.kotlinlesson2"
-        minSdk 23
+        minSdkVersion 24
         targetSdk 30
         versionCode 1
         versionName "1.0"
@@ -36,6 +36,13 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildTypes.each {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("apikey.properties").newDataInputStream())
+        def apiKey  = properties.getProperty("film_api_key", "")
+        it.buildConfigField "String", "FILM_API_KEY", apiKey
+    }
 }
 
 dependencies {
@@ -47,4 +54,5 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation "com.google.code.gson:gson:2.8.6"
 }

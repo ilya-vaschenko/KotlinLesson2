@@ -3,8 +3,8 @@ package com.example.kotlinlesson2.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.kotlinlesson2.modl.Repository
-import com.example.kotlinlesson2.modl.RepositoryImpl
+import com.example.kotlinlesson2.model.Repository
+import com.example.kotlinlesson2.model.RepositoryImpl
 
 class MainViewModel(
     private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()

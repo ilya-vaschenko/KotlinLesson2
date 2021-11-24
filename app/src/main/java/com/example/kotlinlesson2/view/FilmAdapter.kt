@@ -4,6 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import coil.transform.GrayscaleTransformation
+import com.example.kotlinlesson2.BuildConfig
 import com.example.kotlinlesson2.R
 import com.example.kotlinlesson2.model.Film
 import kotlinx.android.synthetic.main.item_film.view.*
@@ -17,6 +20,7 @@ class FilmAdapter : RecyclerView.Adapter<FilmAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         fun bind(film: Film) {
+
             itemView.apply {
                 title.text = film.name
                 genre.text = film.genre
@@ -24,6 +28,10 @@ class FilmAdapter : RecyclerView.Adapter<FilmAdapter.ViewHolder>() {
                 imageView.setImageResource(film.imageIndex)
                 setOnClickListener {
                     listener?.onItemClick(film)
+                }
+                imageView.load("https://image.tmdb.org/t/p/w500${film.posterPath}?api_key=${BuildConfig.FILM_API_KEY}") {
+                    crossfade(true)
+                    transformations(GrayscaleTransformation())
                 }
             }
         }

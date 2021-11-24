@@ -4,6 +4,7 @@ package com.example.kotlinlesson2.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -35,15 +36,24 @@ public final class DetailFragmentBinding implements ViewBinding {
   @NonNull
   public final TextView detailName;
 
+  @NonNull
+  public final FrameLayout loadingLayout;
+
+  @NonNull
+  public final LinearLayout mainViewDetail;
+
   private DetailFragmentBinding(@NonNull LinearLayout rootView, @NonNull TextView description,
       @NonNull TextView detailDate, @NonNull TextView detailGenre, @NonNull ImageView detailImg,
-      @NonNull TextView detailName) {
+      @NonNull TextView detailName, @NonNull FrameLayout loadingLayout,
+      @NonNull LinearLayout mainViewDetail) {
     this.rootView = rootView;
     this.description = description;
     this.detailDate = detailDate;
     this.detailGenre = detailGenre;
     this.detailImg = detailImg;
     this.detailName = detailName;
+    this.loadingLayout = loadingLayout;
+    this.mainViewDetail = mainViewDetail;
   }
 
   @Override
@@ -103,8 +113,20 @@ public final class DetailFragmentBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.loading_layout;
+      FrameLayout loadingLayout = ViewBindings.findChildViewById(rootView, id);
+      if (loadingLayout == null) {
+        break missingId;
+      }
+
+      id = R.id.main_view_detail;
+      LinearLayout mainViewDetail = ViewBindings.findChildViewById(rootView, id);
+      if (mainViewDetail == null) {
+        break missingId;
+      }
+
       return new DetailFragmentBinding((LinearLayout) rootView, description, detailDate,
-          detailGenre, detailImg, detailName);
+          detailGenre, detailImg, detailName, loadingLayout, mainViewDetail);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

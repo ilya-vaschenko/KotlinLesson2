@@ -8,6 +8,7 @@
         android:minSdkVersion="24"
         android:targetSdkVersion="30" />
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -21,6 +22,10 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/Theme.KotlinLesson2" >
+        <service
+            android:name="com.example.kotlinlesson2.services.LogsIntentService"
+            android:exported="false" />
+
         <activity
             android:name="com.example.kotlinlesson2.view.MainActivity"
             android:exported="true" >

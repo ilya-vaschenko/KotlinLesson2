@@ -11,7 +11,6 @@ import com.example.kotlinlesson2.databinding.DetailFragmentBinding
 import com.example.kotlinlesson2.model.Film
 import com.example.kotlinlesson2.model.FilmDTO
 import com.example.kotlinlesson2.model.FilmLoader
-import java.lang.StringBuilder
 
 class DetailFragment : Fragment() {
 
@@ -45,7 +44,7 @@ class DetailFragment : Fragment() {
 
                 FilmLoader(film.id, object : FilmLoader.FilmLoaderListener {
                     override fun onLoaded(filmDTO: FilmDTO) {
-                        requireActivity().runOnUiThread { //так как мы не можем рисовать не из основного потока, переходим в основной
+                        requireActivity().runOnUiThread {
                             displayFilm(filmDTO)
                         }
                     }
@@ -73,14 +72,13 @@ class DetailFragment : Fragment() {
             detailName.text = film.title
             detailGenre.text = getGenres(film.genres)
             description.text = film.overview
-            // detailImg.setImageResource(film.imageIndex)
         }
     }
 
     private fun getGenres(genres: List<FilmDTO.GenresDTO?>): String {
         val genresString = StringBuilder()
         genres.forEach {
-            genresString.append("${it?.name}, ") // добавить
+            genresString.append("${it?.name}, ")
         }
         return genresString.toString()
     }

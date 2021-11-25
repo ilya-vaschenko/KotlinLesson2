@@ -6,6 +6,4 @@ class RepositoryImpl : Repository {
     override fun getFilmFromLocalStorageRus(): List<Film> = getRusFilms()
 
     override fun getFilmFromLocalStorageWorld(): List<Film> = getWorldFilms()
-
-
 }

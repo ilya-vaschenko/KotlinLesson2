@@ -1,5 +1,6 @@
 package com.example.kotlinlesson2.view
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +16,8 @@ import com.example.kotlinlesson2.viewmodel.AppState
 import com.example.kotlinlesson2.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.main_fragment.*
 
+private const val dataSetKey = "dataSetKey"
+
 class MainFragment : Fragment() {
 
     companion object {
@@ -29,7 +32,6 @@ class MainFragment : Fragment() {
     }
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
-    private var isRus: Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,16 +64,6 @@ class MainFragment : Fragment() {
                 }
             }
 
-        binding.buttonLang.setOnClickListener {
-            isRus = !isRus
-            if (isRus) {
-                binding.buttonLang.setImageResource(R.drawable.russ)
-            } else {
-                binding.buttonLang.setImageResource(R.drawable.euro)
-            }
-            viewModel.getFilmFromRemoteDataSource()
-        }
-
         button.setOnClickListener {
             viewModel.liveData.observe(viewLifecycleOwner)
             { state ->
@@ -79,8 +71,34 @@ class MainFragment : Fragment() {
 
                 renderData(state)
             }
-            viewModel.getFilmFromRemoteDataSource()
+            viewModel.getFilmFromRemoteDataSource(isAdult())
         }
+
+        ////////////нажатие на чек бокс - сохраняет значение
+        button_adult.setOnCheckedChangeListener { buttonView, isChecked ->
+            setDataSetToDisk(isChecked) //записываем тру или фолс
+        }
+
+        ///////////при создании экрана(перезапуск приложения) узнает нажато или нет
+        button_adult.isChecked = isAdult()
+
+    }
+
+    ////////////////////////////////////////////////////СОХРАНЯЕМ
+    private fun setDataSetToDisk(isAdult: Boolean) {
+        val editor = activity?.getPreferences(Context.MODE_PRIVATE)?.edit() //открываем на чтение
+        editor?.putBoolean(dataSetKey, isAdult) //сохраняем буленовское значение в преференсы
+        editor?.apply() //апплай работает ассинхронно
+    }
+
+    ////////////////////////ПОЛУЧАЕМ
+    private fun isAdult(): Boolean {
+        activity?.let {
+            return activity
+                ?.getPreferences(Context.MODE_PRIVATE)
+                ?.getBoolean(dataSetKey, true) ?: true
+        }
+        return false
     }
 
     private fun renderData(state: AppState) {
@@ -115,7 +133,7 @@ class MainFragment : Fragment() {
                 binding.FABButton.showSnackBar(
                     "ERROR",
                     "Reload",
-                    { viewModel.getFilmFromRemoteDataSource() }
+                    { viewModel.getFilmFromRemoteDataSource(isAdult()) }
                 )
 
             }

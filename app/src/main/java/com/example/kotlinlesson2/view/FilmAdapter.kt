@@ -23,7 +23,6 @@ class FilmAdapter : RecyclerView.Adapter<FilmAdapter.ViewHolder>() {
 
             itemView.apply {
                 title.text = film.name
-                genre.text = film.genre
                 date.text = film.date.toString()
                 imageView.setImageResource(film.imageIndex)
                 setOnClickListener {

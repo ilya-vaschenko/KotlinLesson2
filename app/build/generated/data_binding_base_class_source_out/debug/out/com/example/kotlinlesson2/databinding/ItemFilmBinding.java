@@ -4,7 +4,6 @@ package com.example.kotlinlesson2.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,29 +24,16 @@ public final class ItemFilmBinding implements ViewBinding {
   public final TextView date;
 
   @NonNull
-  public final TextView description;
-
-  @NonNull
-  public final TextView genre;
-
-  @NonNull
   public final AppCompatImageView imageView;
-
-  @NonNull
-  public final CheckBox like;
 
   @NonNull
   public final TextView title;
 
   private ItemFilmBinding(@NonNull CardView rootView, @NonNull TextView date,
-      @NonNull TextView description, @NonNull TextView genre, @NonNull AppCompatImageView imageView,
-      @NonNull CheckBox like, @NonNull TextView title) {
+      @NonNull AppCompatImageView imageView, @NonNull TextView title) {
     this.rootView = rootView;
     this.date = date;
-    this.description = description;
-    this.genre = genre;
     this.imageView = imageView;
-    this.like = like;
     this.title = title;
   }
 
@@ -84,27 +70,9 @@ public final class ItemFilmBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.description;
-      TextView description = ViewBindings.findChildViewById(rootView, id);
-      if (description == null) {
-        break missingId;
-      }
-
-      id = R.id.genre;
-      TextView genre = ViewBindings.findChildViewById(rootView, id);
-      if (genre == null) {
-        break missingId;
-      }
-
       id = R.id.imageView;
       AppCompatImageView imageView = ViewBindings.findChildViewById(rootView, id);
       if (imageView == null) {
-        break missingId;
-      }
-
-      id = R.id.like;
-      CheckBox like = ViewBindings.findChildViewById(rootView, id);
-      if (like == null) {
         break missingId;
       }
 
@@ -114,8 +82,7 @@ public final class ItemFilmBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ItemFilmBinding((CardView) rootView, date, description, genre, imageView, like,
-          title);
+      return new ItemFilmBinding((CardView) rootView, date, imageView, title);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

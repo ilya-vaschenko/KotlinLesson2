@@ -4,12 +4,20 @@
         "source": "C:\\Android\\Project\\KotlinLesson2\\app\\src\\main\\res\\layout\\main_fragment.xml"
     },
     {
+        "merged": "C:\\Android\\Project\\KotlinLesson2\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_history.xml",
+        "source": "C:\\Android\\Project\\KotlinLesson2\\app\\src\\main\\res\\layout\\fragment_history.xml"
+    },
+    {
         "merged": "C:\\Android\\Project\\KotlinLesson2\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\main_activity.xml",
         "source": "C:\\Android\\Project\\KotlinLesson2\\app\\src\\main\\res\\layout\\main_activity.xml"
     },
     {
         "merged": "C:\\Android\\Project\\KotlinLesson2\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\detail_fragment.xml",
         "source": "C:\\Android\\Project\\KotlinLesson2\\app\\src\\main\\res\\layout\\detail_fragment.xml"
+    },
+    {
+        "merged": "C:\\Android\\Project\\KotlinLesson2\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\item_history.xml",
+        "source": "C:\\Android\\Project\\KotlinLesson2\\app\\src\\main\\res\\layout\\item_history.xml"
     },
     {
         "merged": "C:\\Android\\Project\\KotlinLesson2\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\item_film.xml",

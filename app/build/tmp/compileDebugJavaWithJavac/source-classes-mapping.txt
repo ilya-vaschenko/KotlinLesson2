@@ -1,10 +1,22 @@
+com/example/kotlinlesson2/model/database/HistoryDataBase_Impl.java
+ com.example.kotlinlesson2.model.database.HistoryDataBase_Impl
+ com.example.kotlinlesson2.model.database.HistoryDataBase_Impl$1
+com/example/kotlinlesson2/BuildConfig.java
+ com.example.kotlinlesson2.BuildConfig
+com/example/kotlinlesson2/model/database/HistoryDao_Impl.java
+ com.example.kotlinlesson2.model.database.HistoryDao_Impl
+ com.example.kotlinlesson2.model.database.HistoryDao_Impl$1
+ com.example.kotlinlesson2.model.database.HistoryDao_Impl$2
+ com.example.kotlinlesson2.model.database.HistoryDao_Impl$3
+com/example/kotlinlesson2/databinding/FragmentHistoryBinding.java
+ com.example.kotlinlesson2.databinding.FragmentHistoryBinding
 com/example/kotlinlesson2/databinding/MainFragmentBinding.java
  com.example.kotlinlesson2.databinding.MainFragmentBinding
 com/example/kotlinlesson2/databinding/MainActivityBinding.java
  com.example.kotlinlesson2.databinding.MainActivityBinding
 com/example/kotlinlesson2/databinding/ItemFilmBinding.java
  com.example.kotlinlesson2.databinding.ItemFilmBinding
-com/example/kotlinlesson2/BuildConfig.java
- com.example.kotlinlesson2.BuildConfig
+com/example/kotlinlesson2/databinding/ItemHistoryBinding.java
+ com.example.kotlinlesson2.databinding.ItemHistoryBinding
 com/example/kotlinlesson2/databinding/DetailFragmentBinding.java
  com.example.kotlinlesson2.databinding.DetailFragmentBinding

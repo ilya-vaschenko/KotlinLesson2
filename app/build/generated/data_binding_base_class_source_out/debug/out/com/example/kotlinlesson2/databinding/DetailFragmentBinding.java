@@ -4,6 +4,8 @@ package com.example.kotlinlesson2.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,6 +22,9 @@ import java.lang.String;
 public final class DetailFragmentBinding implements ViewBinding {
   @NonNull
   private final LinearLayout rootView;
+
+  @NonNull
+  public final Button addNoteButton;
 
   @NonNull
   public final TextView description;
@@ -42,11 +47,16 @@ public final class DetailFragmentBinding implements ViewBinding {
   @NonNull
   public final LinearLayout mainViewDetail;
 
-  private DetailFragmentBinding(@NonNull LinearLayout rootView, @NonNull TextView description,
-      @NonNull TextView detailDate, @NonNull TextView detailGenre, @NonNull ImageView detailImg,
-      @NonNull TextView detailName, @NonNull FrameLayout loadingLayout,
-      @NonNull LinearLayout mainViewDetail) {
+  @NonNull
+  public final EditText note;
+
+  private DetailFragmentBinding(@NonNull LinearLayout rootView, @NonNull Button addNoteButton,
+      @NonNull TextView description, @NonNull TextView detailDate, @NonNull TextView detailGenre,
+      @NonNull ImageView detailImg, @NonNull TextView detailName,
+      @NonNull FrameLayout loadingLayout, @NonNull LinearLayout mainViewDetail,
+      @NonNull EditText note) {
     this.rootView = rootView;
+    this.addNoteButton = addNoteButton;
     this.description = description;
     this.detailDate = detailDate;
     this.detailGenre = detailGenre;
@@ -54,6 +64,7 @@ public final class DetailFragmentBinding implements ViewBinding {
     this.detailName = detailName;
     this.loadingLayout = loadingLayout;
     this.mainViewDetail = mainViewDetail;
+    this.note = note;
   }
 
   @Override
@@ -83,6 +94,12 @@ public final class DetailFragmentBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.add_note_button;
+      Button addNoteButton = ViewBindings.findChildViewById(rootView, id);
+      if (addNoteButton == null) {
+        break missingId;
+      }
+
       id = R.id.description;
       TextView description = ViewBindings.findChildViewById(rootView, id);
       if (description == null) {
@@ -125,8 +142,14 @@ public final class DetailFragmentBinding implements ViewBinding {
         break missingId;
       }
 
-      return new DetailFragmentBinding((LinearLayout) rootView, description, detailDate,
-          detailGenre, detailImg, detailName, loadingLayout, mainViewDetail);
+      id = R.id.note;
+      EditText note = ViewBindings.findChildViewById(rootView, id);
+      if (note == null) {
+        break missingId;
+      }
+
+      return new DetailFragmentBinding((LinearLayout) rootView, addNoteButton, description,
+          detailDate, detailGenre, detailImg, detailName, loadingLayout, mainViewDetail, note);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

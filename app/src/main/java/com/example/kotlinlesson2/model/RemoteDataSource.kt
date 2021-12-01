@@ -37,7 +37,7 @@ class RemoteDataSource {
     }
 
     fun getPopularFilmsFromRemoteDataSource(callback: Callback<FilmModel>) {
-        filmApi.getPopularFilm(BuildConfig.FILM_API_KEY).enqueue(callback)
+        filmApi.getPopularFilm(BuildConfig.FILM_API_KEY, "ru-RU").enqueue(callback)
     }
 
 }

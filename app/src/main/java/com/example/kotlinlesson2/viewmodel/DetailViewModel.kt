@@ -8,19 +8,27 @@ import com.example.kotlinlesson2.BuildConfig
 import com.example.kotlinlesson2.model.Film
 import com.example.kotlinlesson2.model.FilmDTO
 import com.example.kotlinlesson2.model.RemoteDataSource
+import com.example.kotlinlesson2.model.database.HistoryEntity
 import com.example.kotlinlesson2.model.repos.DetailsRepository
 import com.example.kotlinlesson2.model.repos.DetailsRepositoryImpl
+import com.example.kotlinlesson2.model.repos.LocalRepository
+import com.example.kotlinlesson2.model.repos.LocalRepositoryImpl
+import com.example.kotlinlesson2.view.App
 import com.google.gson.Gson
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
 import java.io.IOException
 import java.text.ParseException
+import java.util.*
 
 class DetailViewModel() : ViewModel(), LifecycleObserver {
     private val repository: DetailsRepository =
         DetailsRepositoryImpl(RemoteDataSource())
     private val detailLiveData = MutableLiveData<AppState>()
+
+    private val localRepository: LocalRepository =
+        LocalRepositoryImpl(App.getHistoryDao()) //тут спрятан контекст
 
     val liveData: LiveData<AppState> = detailLiveData
 
@@ -71,5 +79,17 @@ class DetailViewModel() : ViewModel(), LifecycleObserver {
             genresString.append("${it?.name}, ")
         }
         return genresString.toString()
+    }
+
+    fun saveFilm(film: Film, note: String) {
+        localRepository.saveEntity(
+            HistoryEntity(
+                id = 0,
+                title = film.name,
+                timestamp = Date().time,
+                notes = note
+
+            )
+        )
     }
 }

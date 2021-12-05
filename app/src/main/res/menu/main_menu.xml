@@ -7,4 +7,9 @@
         android:icon="@android:drawable/ic_menu_recent_history"
         app:showAsAction="always"/>
 
+    <item android:id="@+id/getGeoPosition"
+        android:title="Position"
+        android:icon="@drawable/ic_baseline_my_location_24"
+        app:showAsAction="always"/>
+
 </menu>

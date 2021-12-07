@@ -5,8 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,7 +30,7 @@ public final class MainFragmentBinding implements ViewBinding {
   public final Button button;
 
   @NonNull
-  public final ImageButton buttonLang;
+  public final CheckBox buttonAdult;
 
   @NonNull
   public final FrameLayout loadingLayout;
@@ -46,13 +46,12 @@ public final class MainFragmentBinding implements ViewBinding {
 
   private MainFragmentBinding(@NonNull FrameLayout rootView,
       @NonNull FloatingActionButton FABButton, @NonNull Button button,
-      @NonNull ImageButton buttonLang, @NonNull FrameLayout loadingLayout,
-      @NonNull FrameLayout main, @NonNull LinearLayout mainView,
-      @NonNull RecyclerView recyclerViewLines) {
+      @NonNull CheckBox buttonAdult, @NonNull FrameLayout loadingLayout, @NonNull FrameLayout main,
+      @NonNull LinearLayout mainView, @NonNull RecyclerView recyclerViewLines) {
     this.rootView = rootView;
     this.FABButton = FABButton;
     this.button = button;
-    this.buttonLang = buttonLang;
+    this.buttonAdult = buttonAdult;
     this.loadingLayout = loadingLayout;
     this.main = main;
     this.mainView = mainView;
@@ -98,9 +97,9 @@ public final class MainFragmentBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.button_lang;
-      ImageButton buttonLang = ViewBindings.findChildViewById(rootView, id);
-      if (buttonLang == null) {
+      id = R.id.button_adult;
+      CheckBox buttonAdult = ViewBindings.findChildViewById(rootView, id);
+      if (buttonAdult == null) {
         break missingId;
       }
 
@@ -124,7 +123,7 @@ public final class MainFragmentBinding implements ViewBinding {
         break missingId;
       }
 
-      return new MainFragmentBinding((FrameLayout) rootView, FABButton, button, buttonLang,
+      return new MainFragmentBinding((FrameLayout) rootView, FABButton, button, buttonAdult,
           loadingLayout, main, mainView, recyclerViewLines);
     }
     String missingId = rootView.getResources().getResourceName(id);

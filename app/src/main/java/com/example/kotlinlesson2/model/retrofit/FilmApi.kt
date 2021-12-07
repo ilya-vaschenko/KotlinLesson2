@@ -10,7 +10,8 @@ import retrofit2.http.Query
 interface FilmApi {
     @GET("/3/discover/movie?sort_by=popularity.desc")
     fun getPopularFilm(
-        @Query("api_key") apiKey: String
+        @Query("api_key") apiKey: String,
+        @Query("language") lanq: String
     ): Call<FilmModel>
 
     @GET("movie/{id}")

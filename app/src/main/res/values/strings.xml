@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">KotlinLesson2</string>
+    <string name="Add_note">Сохранить</string>
 </resources>

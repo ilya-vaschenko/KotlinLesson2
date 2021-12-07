@@ -1777,6 +1777,7 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable art
 drawable avd_hide_password
 drawable avd_show_password
 drawable btn_checkbox_checked_mtrl
@@ -1838,6 +1839,7 @@ drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable oblo
+drawable roza
 drawable russ
 drawable russian_flag
 drawable sova
@@ -1855,6 +1857,7 @@ id BOTTOM_START
 id CTRL
 id FAB_button
 id FUNCTION
+id ID
 id META
 id NO_DEBUG
 id SHIFT
@@ -1921,6 +1924,7 @@ id action_text
 id actions
 id activity_chooser_view_content
 id add
+id add_note_button
 id alertTitle
 id aligned
 id all
@@ -1950,7 +1954,7 @@ id bounceEnd
 id bounceStart
 id button
 id buttonPanel
-id button_lang
+id button_adult
 id cache_measures
 id cancel_button
 id carryVelocity
@@ -2049,7 +2053,6 @@ id floating
 id forever
 id fragment_container_view_tag
 id frost
-id genre
 id ghost_view
 id ghost_view_holder
 id gone
@@ -2067,6 +2070,7 @@ id honorRequest
 id horizontal_only
 id icon
 id icon_group
+id idHistory
 id ifRoom
 id ignore
 id ignoreRequest
@@ -2086,7 +2090,6 @@ id layout
 id left
 id leftToRight
 id legacy
-id like
 id line1
 id line3
 id linear
@@ -2165,6 +2168,8 @@ id noState
 id none
 id normal
 id north
+id note
+id notes
 id notification_background
 id notification_main_column
 id notification_main_column_container
@@ -2192,6 +2197,7 @@ id progress_horizontal
 id radio
 id ratio
 id rectangles
+id recycler_view
 id recycler_view_lines
 id reverseSawtooth
 id right
@@ -2417,7 +2423,9 @@ layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout detail_fragment
+layout fragment_history
 layout item_film
+layout item_history
 layout main_activity
 layout main_fragment
 layout material_chip_input_combo
@@ -2488,9 +2496,11 @@ layout text_view_with_line_height_from_layout
 layout text_view_with_line_height_from_style
 layout text_view_with_theme_line_height
 layout text_view_without_line_height
+menu main_menu
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
+string Add_note
 string abc_action_bar_home_description
 string abc_action_bar_up_description
 string abc_action_menu_overflow_description

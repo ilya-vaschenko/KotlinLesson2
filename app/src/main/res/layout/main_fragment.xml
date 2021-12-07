@@ -20,15 +20,15 @@
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:text="Поиск" />
 
-            <ImageButton
-                android:id="@+id/button_lang"
+            <CheckBox
+                android:id="@+id/button_adult"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
-                android:src="@drawable/russ" />
+                android:layout_marginTop="4dp" />
 
         </LinearLayout>
 

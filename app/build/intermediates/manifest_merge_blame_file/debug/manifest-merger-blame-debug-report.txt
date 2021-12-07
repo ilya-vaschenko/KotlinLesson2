@@ -18,48 +18,59 @@
 12-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:7:22-64
 13
 14    <application
-14-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:9:5-31:19
-15        android:allowBackup="true"
-15-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:10:9-35
-16        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-16-->[androidx.core:core:1.6.0] C:\Users\Илья Александрович\.gradle\caches\transforms-3\6c6427e3b8463b8f613d3a35711c02ff\transformed\core-1.6.0\AndroidManifest.xml:24:18-86
-17        android:debuggable="true"
-18        android:extractNativeLibs="false"
-19        android:icon="@mipmap/ic_launcher"
-19-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:11:9-43
-20        android:label="@string/app_name"
-20-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:12:9-41
-21        android:roundIcon="@mipmap/ic_launcher_round"
-21-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:13:9-54
-22        android:supportsRtl="true"
-22-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:14:9-35
-23        android:testOnly="true"
-24        android:theme="@style/Theme.KotlinLesson2" >
-24-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:15:9-51
-25        <service
-25-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:17:9-19:40
-26            android:name="com.example.kotlinlesson2.services.LogsIntentService"
-26-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:18:13-55
-27            android:exported="false" />
-27-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:19:13-37
-28
-29        <activity
-29-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:21:9-30:20
-30            android:name="com.example.kotlinlesson2.view.MainActivity"
-30-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:22:13-46
-31            android:exported="true" >
-31-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:23:13-36
-32            <intent-filter>
-32-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:25:13-29:29
-33                <action android:name="android.intent.action.MAIN" />
-33-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:26:17-69
-33-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:26:25-66
-34
-35                <category android:name="android.intent.category.LAUNCHER" />
-35-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:28:17-77
-35-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:28:27-74
-36            </intent-filter>
-37        </activity>
-38    </application>
+14-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:9:5-32:19
+15        android:name="com.example.kotlinlesson2.view.App"
+15-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:10:9-33
+16        android:allowBackup="true"
+16-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:11:9-35
+17        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+17-->[androidx.core:core:1.6.0] C:\Users\Илья Александрович\.gradle\caches\transforms-3\6c6427e3b8463b8f613d3a35711c02ff\transformed\core-1.6.0\AndroidManifest.xml:24:18-86
+18        android:debuggable="true"
+19        android:extractNativeLibs="false"
+20        android:icon="@mipmap/ic_launcher"
+20-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:12:9-43
+21        android:label="@string/app_name"
+21-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:13:9-41
+22        android:roundIcon="@mipmap/ic_launcher_round"
+22-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:14:9-54
+23        android:supportsRtl="true"
+23-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:15:9-35
+24        android:testOnly="true"
+25        android:theme="@style/Theme.KotlinLesson2" >
+25-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:16:9-51
+26        <service
+26-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:18:9-20:40
+27            android:name="com.example.kotlinlesson2.services.LogsIntentService"
+27-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:19:13-55
+28            android:exported="false" />
+28-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:20:13-37
+29
+30        <activity
+30-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:22:9-31:20
+31            android:name="com.example.kotlinlesson2.view.MainActivity"
+31-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:23:13-46
+32            android:exported="true" >
+32-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:24:13-36
+33            <intent-filter>
+33-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:26:13-30:29
+34                <action android:name="android.intent.action.MAIN" />
+34-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:27:17-69
+34-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:27:25-66
+35
+36                <category android:name="android.intent.category.LAUNCHER" />
+36-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:29:17-77
+36-->C:\Android\Project\KotlinLesson2\app\src\main\AndroidManifest.xml:29:27-74
+37            </intent-filter>
+38        </activity>
 39
-40</manifest>
+40        <service
+40-->[androidx.room:room-runtime:2.3.0] C:\Users\Илья Александрович\.gradle\caches\transforms-3\7235d957d11d0f0ef2a47d6b0382eeae\transformed\room-runtime-2.3.0\AndroidManifest.xml:25:9-28:40
+41            android:name="androidx.room.MultiInstanceInvalidationService"
+41-->[androidx.room:room-runtime:2.3.0] C:\Users\Илья Александрович\.gradle\caches\transforms-3\7235d957d11d0f0ef2a47d6b0382eeae\transformed\room-runtime-2.3.0\AndroidManifest.xml:26:13-74
+42            android:directBootAware="true"
+42-->[androidx.room:room-runtime:2.3.0] C:\Users\Илья Александрович\.gradle\caches\transforms-3\7235d957d11d0f0ef2a47d6b0382eeae\transformed\room-runtime-2.3.0\AndroidManifest.xml:27:13-43
+43            android:exported="false" />
+43-->[androidx.room:room-runtime:2.3.0] C:\Users\Илья Александрович\.gradle\caches\transforms-3\7235d957d11d0f0ef2a47d6b0382eeae\transformed\room-runtime-2.3.0\AndroidManifest.xml:28:13-37
+44    </application>
+45
+46</manifest>

@@ -14,6 +14,7 @@ import com.example.kotlinlesson2.databinding.DetailFragmentBinding
 import com.example.kotlinlesson2.model.Film
 import com.example.kotlinlesson2.viewmodel.AppState
 import com.example.kotlinlesson2.viewmodel.DetailViewModel
+import kotlinx.android.synthetic.main.detail_fragment.*
 
 class DetailFragment : Fragment() {
 
@@ -26,6 +27,7 @@ class DetailFragment : Fragment() {
             return fragment
         }
     }
+    var noteString = ""
 
     private val viewModel: DetailViewModel by lazy {
         ViewModelProvider(this).get(DetailViewModel::class.java)
@@ -52,6 +54,14 @@ class DetailFragment : Fragment() {
             renderData(it)
         }
         viewModel.getFilmFromRemoteDataSource(film)
+
+        add_note_button.setOnClickListener {
+            noteString = note.text.toString()
+            Thread{
+                viewModel.saveFilm(film, noteString)
+            }.start()
+            add_note_button.text = "Сохранено"
+        }
     }
 
     private fun renderData(state: AppState) {
@@ -66,6 +76,11 @@ class DetailFragment : Fragment() {
                 binding.mainViewDetail.show()
 
                 val film = state.filmsList.first()
+
+                Thread{
+                    viewModel.saveFilm(film, noteString)
+                }.start()
+
                 with(binding) {
                     detailDate.text = film.date.toString()
                     detailName.text = film.name

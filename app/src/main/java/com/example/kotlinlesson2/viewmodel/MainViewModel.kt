@@ -23,7 +23,7 @@ class MainViewModel(
 
     val liveData: LiveData<AppState> = liveDataToObserve
 
-    fun getFilmFromRemoteDataSource() {
+    fun getFilmFromRemoteDataSource(adult: Boolean) {
         liveDataToObserve.value = AppState.Loading
 
         repository.getPopularFilmsByRetro(object : retrofit2.Callback<FilmModel> {
@@ -34,6 +34,12 @@ class MainViewModel(
             }
 
             override fun onResponse(call: Call<FilmModel>, response: Response<FilmModel>) {
+                if (!adult) {
+                    response.body()?.let {
+                        checkResponse(it.result)
+                        liveDataToObserve.postValue(checkResponse(showFilmsWithoutAdult(it.result)))
+                    }
+                }
                 response.body()?.let {
                     liveDataToObserve.postValue(checkResponse(it.result))
                 }
@@ -49,7 +55,7 @@ class MainViewModel(
                     name = it.title ?: "",
                     id = it.id ?: 0,
                     date = it.release_date ?: "",
-                    genre = "fdsf",
+                    genre = "",
                     description = it.overview ?: "",
                     posterPath = it.poster_path ?: ""
                 )
@@ -58,6 +64,16 @@ class MainViewModel(
 
         return AppState.Success(filmsList)
 
+    }
+
+    private fun showFilmsWithoutAdult(filmsList: List<FilmDTO>): List<FilmDTO> {
+        val listWithoutAdult = mutableListOf<FilmDTO>()
+        filmsList.forEach {
+            if (!it.adult) {
+                listWithoutAdult.add(it)
+            }
+        }
+        return listWithoutAdult
     }
 }
 

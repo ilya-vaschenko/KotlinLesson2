@@ -7,6 +7,7 @@ data class FilmDTO(
     val release_date: String?,
     val overview: String?,
     val poster_path: String?,
+    val adult: Boolean
 ) {
     data class GenresDTO(
         val id: Long?,

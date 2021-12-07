@@ -4,13 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import coil.load
+import coil.transform.GrayscaleTransformation
+import com.example.kotlinlesson2.BuildConfig
 import com.example.kotlinlesson2.R
 import com.example.kotlinlesson2.databinding.DetailFragmentBinding
 import com.example.kotlinlesson2.model.Film
-import com.example.kotlinlesson2.model.FilmDTO
-import com.example.kotlinlesson2.model.FilmLoader
+import com.example.kotlinlesson2.viewmodel.AppState
+import com.example.kotlinlesson2.viewmodel.DetailViewModel
 
 class DetailFragment : Fragment() {
 
@@ -22,6 +25,10 @@ class DetailFragment : Fragment() {
             fragment.arguments = bundle
             return fragment
         }
+    }
+
+    private val viewModel: DetailViewModel by lazy {
+        ViewModelProvider(this).get(DetailViewModel::class.java)
     }
 
     private var _binding: DetailFragmentBinding? = null
@@ -39,48 +46,48 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arguments?.getParcelable<Film>(FILM_EXTRA)
-            ?.let { film ->
+        val film = arguments?.getParcelable<Film>(FILM_EXTRA) ?: Film()
 
-                FilmLoader(film.id, object : FilmLoader.FilmLoaderListener {
-                    override fun onLoaded(filmDTO: FilmDTO) {
-                        requireActivity().runOnUiThread {
-                            displayFilm(filmDTO)
-                        }
+        viewModel.liveData.observe(viewLifecycleOwner) {
+            renderData(it)
+        }
+        viewModel.getFilmFromRemoteDataSource(film)
+    }
+
+    private fun renderData(state: AppState) {
+        when (state) {
+            is AppState.Loading -> {
+                binding.loadingLayout.show()
+                binding.mainViewDetail.hide()
+            }
+
+            is AppState.Success -> {
+                binding.loadingLayout.hide()
+                binding.mainViewDetail.show()
+
+                val film = state.filmsList.first()
+                with(binding) {
+                    detailDate.text = film.date.toString()
+                    detailName.text = film.name
+                    detailGenre.text = film.genre
+                    description.text = film.description
+                    detailImg.load("https://image.tmdb.org/t/p/w500${film.posterPath}?api_key=${BuildConfig.FILM_API_KEY}") {
+                        crossfade(true)
+                        transformations(GrayscaleTransformation())
                     }
+                }
+            }
 
-                    override fun onFailed(throwable: Throwable) {
-                        requireActivity().runOnUiThread {
-                            Toast.makeText(
-                                requireContext(),
-                                throwable.localizedMessage,
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-
-                    }
-
-                }).goToInternet()
+            is AppState.Error -> {
+                binding.loadingLayout.hide()
+                binding.mainViewDetail.showSnackBar(
+                    "ERROR",
+                    "Reload",
+                    { viewModel.getFilmFromRemoteDataSource(Film()) }
+                )
 
             }
-    }
-
-    private fun displayFilm(film: FilmDTO) {
-
-        with(binding) {
-            detailDate.text = film.release_date.toString()
-            detailName.text = film.title
-            detailGenre.text = getGenres(film.genres)
-            description.text = film.overview
         }
-    }
-
-    private fun getGenres(genres: List<FilmDTO.GenresDTO?>): String {
-        val genresString = StringBuilder()
-        genres.forEach {
-            genresString.append("${it?.name}, ")
-        }
-        return genresString.toString()
     }
 
     override fun onDestroyView() {

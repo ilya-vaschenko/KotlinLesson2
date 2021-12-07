@@ -1,6 +1,7 @@
 package com.example.kotlinlesson2.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kotlinlesson2.R
 import com.example.kotlinlesson2.databinding.MainFragmentBinding
 import com.example.kotlinlesson2.viewmodel.AppState
-import com.example.kotlinlesson2.viewmodel.LogEvent
 import com.example.kotlinlesson2.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.main_fragment.*
 
@@ -31,8 +31,6 @@ class MainFragment : Fragment() {
     private val binding get() = _binding!!
     private var isRus: Boolean = true
 
-    private val log = LogEvent()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,7 +42,6 @@ class MainFragment : Fragment() {
 
         _binding = MainFragmentBinding.bind(view)
         return binding.root
-        log.writeLog("onCreateView", context)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,8 +49,6 @@ class MainFragment : Fragment() {
 
         filmAdapter.listener =
             FilmAdapter.OnItemViewClickListener { film ->
-                log.writeLog("Зашли посмотреть на фильм ${film.name}", context)
-
                 activity?.supportFragmentManager?.let {
                     it.beginTransaction()
                         .replace(R.id.container, DetailFragment.newInstance(Bundle().apply {
@@ -69,33 +64,35 @@ class MainFragment : Fragment() {
 
         binding.buttonLang.setOnClickListener {
             isRus = !isRus
-
-            log.writeLog("Нажали на кнопку, чтоб изменить страну", context)
-
             if (isRus) {
                 binding.buttonLang.setImageResource(R.drawable.russ)
             } else {
                 binding.buttonLang.setImageResource(R.drawable.euro)
             }
-            viewModel.getFilmFromLocalSource(isRus)
+            viewModel.getFilmFromRemoteDataSource()
         }
 
         button.setOnClickListener {
-            log.writeLog("нажали на поиск фильмов", context)
             viewModel.liveData.observe(viewLifecycleOwner)
             { state ->
+                Log.d("fff", "$state")
+
                 renderData(state)
             }
-            viewModel.getFilmFromLocalSource(isRus)
+            viewModel.getFilmFromRemoteDataSource()
         }
     }
 
     private fun renderData(state: AppState) {
         when (state) {
-            is AppState.Loading -> binding.loadingLayout.show()
+            is AppState.Loading -> {
+                Log.d("fff", "loading")
+                binding.loadingLayout.show()
+            }
 
             is AppState.Success -> {
                 binding.loadingLayout.hide()
+                Log.d("fff", "success")
 
                 filmAdapter.filmList = state.filmsList
 
@@ -118,7 +115,7 @@ class MainFragment : Fragment() {
                 binding.FABButton.showSnackBar(
                     "ERROR",
                     "Reload",
-                    { viewModel.getFilmFromLocalSource() }
+                    { viewModel.getFilmFromRemoteDataSource() }
                 )
 
             }
